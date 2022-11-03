@@ -76,5 +76,26 @@ export default class UserController {
             res.status(400).send(response)
         }
     }
+    
+    async login(req: Request, res: Response) {
+        const service = new UserService()
+        const user = req.body
+        try{
+            const userLogedin = await service.login(user)
+            if (userLogedin && userLogedin.length > 0) {
+                const response = createApiResponse(userLogedin[0], "Success to update the user", Status.Success)
+                res.status(200).send(response)
+            }
+            else {
+                const response = createApiResponse({}, "Email or password wrong", Status.Error)
+                res.status(200).send(response)
+            }
+        }
+        catch(e){
+            console.log(e)
+            const response = createApiResponse(null, "Error to get the user", Status.Error)
+            res.status(400).send(response)
+        }
+    }
 
 }

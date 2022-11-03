@@ -34,3 +34,8 @@ export type UserView = {
     username: string,
     image: any
 }
+
+export type UserLogin = {
+    email: string,
+    password: string
+}

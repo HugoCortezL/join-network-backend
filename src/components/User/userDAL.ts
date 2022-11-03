@@ -1,5 +1,5 @@
 import {connection} from '../../database';
-import { User, UserInput } from './user';
+import { User, UserInput, UserLogin } from './user';
 
 export default class UserDAL {
 
@@ -83,5 +83,24 @@ export default class UserDAL {
         })
         const userUpdated = await updateUsersPromise
         return userUpdated
+    }
+
+    async login (user: UserLogin): Promise<[User]> {
+        const sqlQuery = `
+        SELECT id, fullname, username, bio, image, email, phone, birthdate, token, posts, followers, following 
+        FROM User
+        WHERE email = '${user.email}' AND password = '${user.password}'
+        `
+        const loginPromise: Promise<[User]> = new Promise((resolve, reject) => {
+            connection.query(sqlQuery, (err, user) => {
+                if(err){
+                    reject(err)
+                }else{
+                    resolve(user)
+                }
+            })
+        })
+        const userLogedin = await loginPromise
+        return userLogedin
     }
 }

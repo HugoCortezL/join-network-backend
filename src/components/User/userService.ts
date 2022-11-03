@@ -1,4 +1,4 @@
-import { User, UserInput } from './user';
+import { User, UserInput, UserLogin } from './user';
 import UserDAL from './userDAL';
 
 export default class UserService {
@@ -47,4 +47,15 @@ export default class UserService {
             return e
         }
     }
+    
+    async login(user: UserLogin): Promise<[User]> {
+        try{
+            const userLogedin = await this.userDal.login(user)
+            return userLogedin
+        }
+        catch(e: any){
+            return e
+        }
+    }
+
 }
