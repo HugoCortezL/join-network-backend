@@ -4,7 +4,7 @@ import { User, UserInput } from './user';
 export default class UserDAL {
 
     async getAll(): Promise<[User]> {
-        const sqlQuery = "SELECT * FROM user"
+        const sqlQuery = "SELECT * FROM User"
         const getUsersPromise: Promise<[User]> = new Promise((resolve, reject) => {
             connection.query(sqlQuery, (err, users) => {
                 if(err){
@@ -20,7 +20,7 @@ export default class UserDAL {
 
     async create(user: UserInput): Promise<User> {
         const sqlQuery = `
-        INSERT INTO user
+        INSERT INTO User
         (fullname, username, email, password)
         VALUES
         ('${user.fullname}', '${user.username}', '${user.email}', '${user.password}')
@@ -40,7 +40,7 @@ export default class UserDAL {
     
     async update(user: User): Promise<User> {
         const sqlQuery = `
-            UPDATE user
+            UPDATE User
             SET
             fullname = '${user.fullname}',
             username = '${user.username}',

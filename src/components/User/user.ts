@@ -27,3 +27,10 @@ export type UserInput = {
     email: string,
     password: string
 }
+
+export type UserView = {
+    id: number,
+    fullname: string,
+    username: string,
+    image: any
+}

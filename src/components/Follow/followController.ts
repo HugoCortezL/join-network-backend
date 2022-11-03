@@ -38,7 +38,7 @@ export default class FollowController {
             if(follower && following){
                 await service.unfollow(+follower, +following)
                 const response = createApiResponse({}, "Success to unfollow the user", Status.Success)
-                res.status(201).send(response)
+                res.status(200).send(response)
             }
             else{
                 const response = createApiResponse({}, "Cant unfollow the user", Status.Error)
@@ -48,6 +48,48 @@ export default class FollowController {
         catch(e){
             console.log(e)
             const response = createApiResponse(null, "Error to unfollow the user", Status.Error)
+            res.status(400).send(response)
+        }
+    }
+
+    async getFollowers(req: Request, res: Response) {
+        const service = new FollowService()
+        const userId = req.params.userId
+        try{
+            if(userId){
+                const followers = await service.getFollowers(+userId)
+                const response = createApiResponse(followers, "Success to retrieve the users", Status.Success)
+                res.status(200).send(response)
+            }
+            else{
+                const response = createApiResponse({}, "Cant retrieve the users", Status.Error)
+                res.status(409).send(response)
+            }
+        }
+        catch(e){
+            console.log(e)
+            const response = createApiResponse(null, "Error to retrieve the users", Status.Error)
+            res.status(400).send(response)
+        }
+    }
+    
+    async getFollowings(req: Request, res: Response) {
+        const service = new FollowService()
+        const userId = req.params.userId
+        try{
+            if(userId){
+                const followings = await service.getFollowings(+userId)
+                const response = createApiResponse(followings, "Success to retrieve the users", Status.Success)
+                res.status(200).send(response)
+            }
+            else{
+                const response = createApiResponse({}, "Cant retrieve the users", Status.Error)
+                res.status(409).send(response)
+            }
+        }
+        catch(e){
+            console.log(e)
+            const response = createApiResponse(null, "Error to retrieve the users", Status.Error)
             res.status(400).send(response)
         }
     }

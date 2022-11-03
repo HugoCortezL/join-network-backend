@@ -13,7 +13,7 @@ export default class FollowDb {
 
     async createTable() {
         const createFollowTableSQL = `
-            CREATE TABLE IF NOT EXISTS follow (
+            CREATE TABLE IF NOT EXISTS Follow (
                 id INT AUTO_INCREMENT,
                 follower INT NOT NULL,
                 following INT NOT NULL,
@@ -37,10 +37,10 @@ export default class FollowDb {
         const followTrigger = `
             CREATE TRIGGER IF NOT EXISTS Trg_follow_after_insert
             AFTER INSERT
-            ON follow
+            ON Follow
             FOR EACH ROW
             BEGIN
-                UPDATE user
+                UPDATE User
                 SET
                 following = (
                     case 
@@ -74,17 +74,17 @@ export default class FollowDb {
         const unfollowTrigger = `
             CREATE TRIGGER IF NOT EXISTS Trg_unfollow_after_delete
             AFTER DELETE
-            ON follow
+            ON Follow
             FOR EACH ROW
             BEGIN
                 
-                UPDATE user
+                UPDATE User
                 SET
                 following = following - 1
                 WHERE
                 id = OLD.follower;
                 
-                UPDATE user
+                UPDATE User
                 SET
                 followers = followers - 1
                 WHERE

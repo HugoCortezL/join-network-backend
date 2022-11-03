@@ -13,7 +13,7 @@ export default class UserDb {
 
     async createTable() {
         const createUserTableSQL = `
-        CREATE TABLE IF NOT EXISTS user (
+        CREATE TABLE IF NOT EXISTS User (
             id INT AUTO_INCREMENT,
             fullname VARCHAR(100) NOT NULL,
             username VARCHAR(20) NOT NULL,
@@ -44,14 +44,14 @@ export default class UserDb {
         const dontCreateUserWithSameEmailTrigger = `
             CREATE TRIGGER IF NOT EXISTS Trg_user_before_insert 
             BEFORE INSERT
-            ON user
+            ON User
             FOR EACH ROW
             BEGIN
                 DECLARE usersWithSameEmail INT;
 
                 SELECT COUNT(*)
                 INTO usersWithSameEmail
-                FROM user
+                FROM User
                 WHERE email = NEW.email OR username = NEW.username;
 
                 IF usersWithSameEmail > 0
