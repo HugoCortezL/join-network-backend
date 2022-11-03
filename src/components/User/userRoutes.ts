@@ -6,7 +6,7 @@ export const userRouter = express.Router()
 const userController = new UserController()
 
 userRouter.get("/user", userController.getAll)
-userRouter.get("/user/login", userController.login)
 userRouter.get("/user/:userId", userController.getById)
 userRouter.post("/user", userController.create)
 userRouter.put("/user", userController.update)
+userRouter.post("/user/login", userController.login)
