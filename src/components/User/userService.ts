@@ -17,6 +17,16 @@ export default class UserService {
             throw new Error(e)
         }
     }
+    
+    async getById(userId: number): Promise<User> {
+        try{
+            const user = await this.userDal.getById(userId)
+            return user
+        }
+        catch(e: any){
+            throw new Error(e)
+        }
+    }
 
     async create(user: UserInput): Promise<User> {
         try{

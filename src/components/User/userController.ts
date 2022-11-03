@@ -21,6 +21,27 @@ export default class UserController {
             res.status(400).send(response)
         }
     }
+    
+    async getById(req: Request, res:Response) {
+        const service = new UserService()
+        const userId = req.params.userId
+        try{
+            if(userId){
+                const user = await service.getById(+userId)
+                const response = createApiResponse(user, "Success to get ths user", Status.Success)
+                res.status(200).send(response)
+            }
+            else{
+                const response = createApiResponse({}, "Cant get ths user", Status.Error)
+                res.status(409).send(response)
+            }
+        }
+        catch(e){
+            console.log(e)
+            const response = createApiResponse(null, "Error to get the user", Status.Error)
+            res.status(400).send(response)
+        }
+    }
 
     async create(req: Request, res: Response) {
         const service = new UserService()
