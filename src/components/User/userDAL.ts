@@ -20,7 +20,8 @@ export default class UserDAL {
 
     async getById(userId: number): Promise<User> {
         const sqlQuery = `
-        SELECT id, fullname, username, bio, image, posts, followers, following FROM User
+        SELECT id, fullname, username, bio, image, posts, followers, following 
+        FROM User
         WHERE id = ${userId}
         `
         const getUser: Promise<User> = new Promise((resolve, reject) => {
