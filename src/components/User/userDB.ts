@@ -32,9 +32,9 @@ export default class UserDb {
         );
         `
         this.connection.query(createUserTableSQL, (err, _) => {
-            if(err){
+            if (err) {
                 throw err
-            }else{
+            } else {
                 console.log("Table 'user' created or exists")
             }
         })
@@ -62,9 +62,9 @@ export default class UserDb {
         `
 
         this.connection.query(dontCreateUserWithSameEmailTrigger, (err, _) => {
-            if(err){
+            if (err) {
                 throw err
-            }else{
+            } else {
                 console.log("Trigger BI same email created or exists")
             }
         })

@@ -1,7 +1,7 @@
 import mysql from 'mysql'
 import dotenv from 'dotenv';
-import  UserDb  from '../components/User/userDB';
-import  FollowDb  from '../components/Follow/followDB';
+import UserDb from '../components/User/userDB';
+import FollowDb from '../components/Follow/followDB';
 dotenv.config();
 
 export const connection = mysql.createConnection({
@@ -11,10 +11,10 @@ export const connection = mysql.createConnection({
     database: process.env.DATABASE
 })
 
-connection.connect(function(err){
-    if(err){
+connection.connect(function (err) {
+    if (err) {
         console.log("Can't connect with database 'joinnetwork'")
-    }else{
+    } else {
         console.log("Connected to database 'joinnetwork'")
     }
 })

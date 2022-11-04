@@ -1,6 +1,6 @@
 import { connection } from '../../database';
 import { User, UserInput, UserLogin } from './user';
-import {v4} from 'uuid'
+import { v4 } from 'uuid'
 export default class UserDAL {
 
     async getAll(): Promise<[User]> {

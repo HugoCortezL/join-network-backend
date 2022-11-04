@@ -64,13 +64,13 @@ export default class FollowDb {
         `
 
         this.connection.query(followTrigger, (err, _) => {
-            if(err){
+            if (err) {
                 throw err
-            }else{
+            } else {
                 console.log("Trigger AI follow created or exists")
             }
         })
-        
+
         const unfollowTrigger = `
             CREATE TRIGGER IF NOT EXISTS Trg_unfollow_after_delete
             AFTER DELETE
@@ -93,9 +93,9 @@ export default class FollowDb {
         `
 
         this.connection.query(unfollowTrigger, (err, _) => {
-            if(err){
+            if (err) {
                 throw err
-            }else{
+            } else {
                 console.log("Trigger AD unfollow created or exists")
             }
         })

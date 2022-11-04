@@ -2,8 +2,8 @@ import express, { Express, Response } from 'express';
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from 'dotenv';
-import {userRouter} from './components/User';
-import {followRouter} from './components/Follow';
+import { userRouter } from './components/User';
+import { followRouter } from './components/Follow';
 
 dotenv.config();
 

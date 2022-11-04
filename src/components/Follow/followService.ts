@@ -8,39 +8,39 @@ export default class FollowService {
     }
 
     async follow(follower: number, following: number): Promise<void> {
-        try{
+        try {
             await this.followDal.follow(follower, following)
         }
-        catch(e: any){
+        catch (e: any) {
             return e
         }
     }
-    
+
     async unfollow(follower: number, following: number): Promise<void> {
-        try{
+        try {
             await this.followDal.unfollow(follower, following)
         }
-        catch(e: any){
+        catch (e: any) {
             return e
         }
     }
 
     async getFollowers(userId: number): Promise<UserView[]> {
-        try{
+        try {
             const followers = await this.followDal.getFollowers(userId)
             return followers
         }
-        catch(e: any){
+        catch (e: any) {
             return e
         }
     }
-    
+
     async getFollowings(userId: number): Promise<UserView[]> {
-        try{
+        try {
             const followings = await this.followDal.getFollowings(userId)
             return followings
         }
-        catch(e: any){
+        catch (e: any) {
             return e
         }
     }

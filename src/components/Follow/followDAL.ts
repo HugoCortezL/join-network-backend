@@ -1,4 +1,4 @@
-import {connection} from '../../database';
+import { connection } from '../../database';
 import { UserView } from '../User';
 
 export default class FollowDAL {
@@ -12,16 +12,16 @@ export default class FollowDAL {
         `
         const followPromise = new Promise((resolve, reject) => {
             connection.query(sqlQuery, (err, success) => {
-                if(err){
+                if (err) {
                     reject(err)
-                }else{
+                } else {
                     resolve(success)
                 }
             })
         })
         await followPromise
     }
-    
+
     async unfollow(follower: number, following: number): Promise<void> {
         const sqlQuery = `
         DELETE FROM Follow
@@ -32,9 +32,9 @@ export default class FollowDAL {
         `
         const unfollowPromise = new Promise((resolve, reject) => {
             connection.query(sqlQuery, (err, success) => {
-                if(err){
+                if (err) {
                     reject(err)
-                }else{
+                } else {
                     resolve(success)
                 }
             })
@@ -51,9 +51,9 @@ export default class FollowDAL {
         `
         const getFollowersPromise: Promise<UserView[]> = new Promise((resolve, reject) => {
             connection.query(sqlQuery, (err, success) => {
-                if(err){
+                if (err) {
                     reject(err)
-                }else{
+                } else {
                     resolve(success)
                 }
             })
@@ -71,9 +71,9 @@ export default class FollowDAL {
         `
         const getFollowingsPromise: Promise<UserView[]> = new Promise((resolve, reject) => {
             connection.query(sqlQuery, (err, success) => {
-                if(err){
+                if (err) {
                     reject(err)
-                }else{
+                } else {
                     resolve(success)
                 }
             })

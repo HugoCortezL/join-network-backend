@@ -9,51 +9,51 @@ export default class UserService {
     }
 
     async getAll(): Promise<[User]> {
-        try{
+        try {
             const users = await this.userDal.getAll()
             return users
         }
-        catch(e: any){
+        catch (e: any) {
             throw new Error(e)
         }
     }
-    
+
     async getById(userId: number): Promise<User> {
-        try{
+        try {
             const user = await this.userDal.getById(userId)
             return user
         }
-        catch(e: any){
+        catch (e: any) {
             throw new Error(e)
         }
     }
 
     async create(user: UserInput): Promise<User> {
-        try{
+        try {
             const userCreated = await this.userDal.create(user)
             return userCreated
         }
-        catch(e: any){
+        catch (e: any) {
             return e
         }
     }
 
     async update(user: User): Promise<User> {
-        try{
+        try {
             const userUpdated = await this.userDal.update(user)
             return userUpdated
         }
-        catch(e: any){
+        catch (e: any) {
             return e
         }
     }
-    
+
     async login(user: UserLogin): Promise<[User]> {
-        try{
+        try {
             const userLogedin = await this.userDal.login(user)
             return userLogedin
         }
-        catch(e: any){
+        catch (e: any) {
             return e
         }
     }

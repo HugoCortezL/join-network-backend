@@ -12,7 +12,7 @@ export type ApiResponse = {
     status: Status
 }
 
-export const createApiResponse = (data: (Object | [Object] | null) , message: string, status: Status): ApiResponse => {
+export const createApiResponse = (data: (Object | [Object] | null), message: string, status: Status): ApiResponse => {
     const response: ApiResponse = {
         id: v4(),
         data,
