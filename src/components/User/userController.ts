@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import UserService from './userService';
 import { createApiResponse, Status } from '../../utils/ApiResponse';
+import {authenticateUser} from '../../middleware/userAuth'
 
 export default class UserController {
     userService: UserService;
@@ -8,7 +9,13 @@ export default class UserController {
         this.userService = new UserService()
     }
 
-    async getAll(_: Request, res: Response) {
+    async getAll(req: Request, res: Response) {
+        const webToken = req.headers.web_token
+        let userAuthenticaded = false
+        if (webToken && typeof webToken === 'string'){
+            userAuthenticaded = await authenticateUser(webToken)
+        }
+        console.log(userAuthenticaded)
         const service = new UserService()
         try {
             const users = await service.getAll()
