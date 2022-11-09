@@ -2,7 +2,7 @@ import { connection } from '../database';
 import jwt from 'jsonwebtoken';
 import type { JwtPayload } from "jsonwebtoken"
 import dotenv from 'dotenv';
-import { User } from 'src/components/User';
+import { User } from '../components/User';
 dotenv.config();
 
 export const authenticateUser = async (webToken: string) => {

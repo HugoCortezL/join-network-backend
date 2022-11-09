@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from 'dotenv';
 import { userRouter } from './components/User';
 import { followRouter } from './components/Follow';
+import { postRouter } from './components/Post';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(cors())
 
 app.use('/api/v1', userRouter)
 app.use('/api/v1', followRouter)
+app.use('/api/v1', postRouter)
 
 
 app.get("/", (_, res: Response) => {

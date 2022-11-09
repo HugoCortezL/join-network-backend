@@ -2,6 +2,7 @@ import mysql from 'mysql'
 import dotenv from 'dotenv';
 import UserDb from '../components/User/userDB';
 import FollowDb from '../components/Follow/followDB';
+import PostDb from '../components/Post/postDB';
 dotenv.config();
 
 export const connection = mysql.createConnection({
@@ -21,10 +22,12 @@ connection.connect(function (err) {
 
 const userDb = new UserDb(connection)
 const followDb = new FollowDb(connection)
+const postDb = new PostDb(connection)
 
 const createAll = async () => {
     await userDb.createAll()
     await followDb.createAll()
+    await postDb.createAll()
 }
 
 createAll()
