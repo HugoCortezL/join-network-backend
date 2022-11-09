@@ -48,7 +48,7 @@ export default class UserService {
         }
     }
 
-    async login(user: UserLogin): Promise<[User]> {
+    async login(user: UserLogin): Promise<String> {
         try {
             const userLogedin = await this.userDal.login(user)
             return userLogedin

@@ -81,14 +81,14 @@ export default class UserController {
         const service = new UserService()
         const user = req.body
         try {
-            const userLogedin = await service.login(user)
-            if (userLogedin && userLogedin.length > 0) {
-                const response = createApiResponse(userLogedin[0], "Success to login", Status.Success)
+            const userLogedinToken = await service.login(user)
+            if (userLogedinToken) {
+                const response = createApiResponse(userLogedinToken, "Success to login", Status.Success)
                 res.status(200).send(response)
             }
             else {
-                const response = createApiResponse({}, "Email or password wrong", Status.Error)
-                res.status(200).send(response)
+                const response = createApiResponse(null, "Email or password wrong", Status.Error)
+                res.status(403).send(response)
             }
         }
         catch (e) {

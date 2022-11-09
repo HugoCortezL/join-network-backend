@@ -1,6 +1,10 @@
 import { connection } from '../../database';
 import { User, UserInput, UserLogin } from './user';
 import { v4 } from 'uuid'
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
+
 export default class UserDAL {
 
     async getAll(): Promise<[User]> {
@@ -104,12 +108,13 @@ export default class UserDAL {
         await beforeLoginPromise
     }
 
-    async login(user: UserLogin): Promise<[User]> {
+    async login(user: UserLogin): Promise<String> {
         await this.beforeLogin(user)
         const sqlQuery = `
-        SELECT id, fullname, username, bio, image, email, phone, birthdate, token, posts, followers, following 
+        SELECT id, fullname, image, token 
         FROM User
         WHERE email = '${user.email}' AND password = '${user.password}'
+        LIMIT 1
         `
         const loginPromise: Promise<[User]> = new Promise((resolve, reject) => {
             connection.query(sqlQuery, (err, user) => {
@@ -121,6 +126,16 @@ export default class UserDAL {
             })
         })
         const userLogedin = await loginPromise
-        return userLogedin
+        let token = ''
+        if (userLogedin && userLogedin.length > 0 && process.env.SECRET_KEY){
+            const finalUser = {
+                id: userLogedin[0].id,
+                fullname: userLogedin[0].fullname,
+                image: userLogedin[0].image,
+                token: userLogedin[0].token
+            }
+            token = jwt.sign(finalUser, process.env.SECRET_KEY);
+        }
+        return token
     }
 }
